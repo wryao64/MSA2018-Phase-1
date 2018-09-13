@@ -1,22 +1,32 @@
 import * as React from 'react';
 import './App.css';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Input from '@material-ui/core/Input';
 
-import logo from './logo.svg';
-
-class App extends React.Component {
+export default class App extends React.Component<{}> {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <div className="container-fluid">
+        <div className="centreText">
+          {/* React components must have a wrapper node/element */}
+          <h1>BookIt</h1>
+          <h2>Run away with a new book in your hand!</h2>
+          <div className="search">
+            <Input
+              placeholder="Genre"
+              // className={classes.input}
+              inputProps={{
+                'aria-label': 'Description',
+              }}
+            />
+            <p></p>
+            <Link to="/FirstComponent">
+              <Button>CLICK ME</Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 }
-
-export default App;
