@@ -3,5 +3,15 @@
 }
 
 h1 {
-    font-size: 150px;
+    font-size: 100px;
 }
+
+.input {
+    /* background-color: aqua; */
+    margin: 10px;
+    /* border: '1px solid #ced4da'; */
+}
+
+/* .btn {
+    background-color: #f6546a;
+} */
