@@ -17,8 +17,8 @@ const styles = (theme: Theme) =>
     },
   });
 
-const API = 'https://openlibrary.org/subjects/';
-const ending = '.json';
+// const API = 'https://openlibrary.org/subjects/';
+// const ending = '.json';
 
 class App extends React.Component<WithStyles<typeof styles>> {
   constructor(props:any) {
@@ -30,11 +30,11 @@ class App extends React.Component<WithStyles<typeof styles>> {
     hits: [],
   }
 
-  getBookData(genre: String) {
-    fetch(API + genre + ending)
-    .then(response => response.json())
-    .then(data => this.setState({ hits: data.hits }));
-  }
+  // getBookData(genre: String) {
+  //   fetch(API + genre + ending)
+  //   .then(response => response.json())
+  //   .then(data => this.setState({ hits: data.hits }));
+  // }
 
   handleChange = (genre:any) => (event:any) => {
     this.setState({
@@ -61,7 +61,8 @@ class App extends React.Component<WithStyles<typeof styles>> {
             />
 
             <Link to="/FirstComponent">
-              <Button variant="outlined" className="btn" onClick={() => this.getBookData(this.state.genre)}>SEARCH</Button>
+              {/* <Button variant="outlined" className="btn" onClick={() => this.getBookData(this.state.genre)}>SEARCH</Button> */}
+              <Button variant="outlined" className="btn">SEARCH</Button>
             </Link>
           </div>
         </div>
