@@ -8,58 +8,80 @@ const ending = '.json';
 const queryLimit = '?limit=';
 const LIMIT = 20;
 
-export default class FirstComponent extends React.Component<{genre: string}, {genre:string, bookTitle: [], bookAuthor: [], index: number, requestFailed: boolean}> {        
-        constructor(props:any) {
-                super(props);
-                this.state = {
-                        genre: '',
-                        bookTitle: [],
-                        bookAuthor: [],
-                        index: Math.floor(Math.random() * LIMIT),
-                        requestFailed: false,
-                }
-        }
+interface bookState {
+  genre: string,
+  bookTitle: [],
+  bookAuthor: [],
+  index: number,
+  requestFailed: boolean,
+}
 
-        componentDidMount() {
-                this.setState({
-                        genre: this.props.genre,
-                })
-                this.getAPIData();
-        }
+export default class FirstComponent extends React.Component<{ genre: string }, bookState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      genre: '',
+      bookTitle: [],
+      bookAuthor: [],
+      index: Math.floor(Math.random() * LIMIT),
+      requestFailed: false,
+    }
+  }
 
-        getAPIData() {
-                let fullQuery = API + this.props.genre + ending + queryLimit + LIMIT;
-                fetch(fullQuery)
-                .then(response => response.json())
-                .then(json => {
-                        if (json.ebook_count === 0) {
-                                throw new Error('No results found')
-                        }
-                        this.setState({
-                                bookTitle: json.works[this.state.index].title,
-                                bookAuthor: json.works[this.state.index].authors[0].name,
-                        })
-                        
-                        }, () => {
-                        this.setState({
-                                requestFailed: true
-                        })
-                })
-                .catch((error) => {
-                        console.log('wow omg an error: ', error)
-                })
-        }
+  componentDidMount() {
+    this.setState({
+      genre: this.props.genre,
+    })
+    this.getAPIData();
+  }
 
-        public render() {
-                if (this.state.requestFailed) return <p>Failed</p>
-                if (this.state.bookTitle === []) return <p>Loading...</p>
-                return (
-                        <div className="centreText">
-                                {/* React components must have a wrapper node/element */}
-                                <h1>And the book is... </h1>
-                                <h2>{this.state.bookTitle}</h2>
-                                <h3>Author: {this.state.bookAuthor}</h3>
-                        </div>
-                );
+  getAPIData() {
+    let fullQuery = API + this.props.genre + ending + queryLimit + LIMIT;
+    fetch(fullQuery)
+      .then(response => response.json())
+      .then(json => {
+        if (json.ebook_count === 0) {
+          throw new Error('No results found')
         }
+        this.setState({
+          bookTitle: json.works[this.state.index].title,
+          bookAuthor: json.works[this.state.index].authors[0].name,
+        })
+
+      }, () => {
+        this.setState({
+          requestFailed: true
+        })
+      })
+      .catch((error) => {
+        // console.log('wow omg an error: ', error)
+        this.setState({
+          requestFailed: true
+        })
+      })
+  }
+
+  public render() {
+    if (this.state.requestFailed) {
+      return (
+        <div className="centreText">
+          <h2>That is not a valid genre!</h2>
+        </div>
+      );
+    } else if (!this.state.requestFailed && this.state.bookTitle[0]) {
+      return (
+        <div className="centreText">
+          <h1>And the book is... </h1>
+          <h2>{this.state.bookTitle}</h2>
+          <h3>Author: {this.state.bookAuthor}</h3>
+        </div>
+      );
+    } else {
+      return (
+        <div className="centreText">
+          <h2>Loading...</h2>
+        </div>
+      );
+    }
+  }
 }
