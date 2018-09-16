@@ -1,73 +1,63 @@
 import * as React from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
+// import FormControl from '@material-ui/core/FormControl';
+// import Button from '@material-ui/core/Button';
+// import { Link } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+// import Input from '@material-ui/core/Input';
+// import TextField from '@material-ui/core/TextField';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import withRoot from './withRoot';
+import Result from './components/Result';
+import Main from './components/Main';
 // import { ButtonToolbar } from 'react-bootstrap';
+
+export interface IState {
+  submitted:boolean
+  genre: string;
+}
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       textAlign: 'center',
       paddingTop: theme.spacing.unit * 20,
+      margin: theme.spacing.unit * 20,
     },
   });
 
-// const API = 'https://openlibrary.org/subjects/';
-// const ending = '.json';
-
-class App extends React.Component<WithStyles<typeof styles>> {
+class App extends React.Component<WithStyles<typeof styles>, IState> {
   constructor(props:any) {
     super(props);
+    this.state = {
+      submitted: false,
+      genre: '',
+    }
   }
 
-  state = {
-    genre: '',
-    hits: [],
-  }
-
-  // getBookData(genre: String) {
-  //   fetch(API + genre + ending)
-  //   .then(response => response.json())
-  //   .then(data => this.setState({ hits: data.hits }));
-  // }
-
-  handleChange = (genre:any) => (event:any) => {
+  //callback function to get genre data from Main
+  cb = (childGenre: string) => {
     this.setState({
-      [genre]: event.target.value,
-    });
-  };
+      genre: childGenre,
+    })
+  }
 
   public render() {
-    return (
-      <div className="container-fluid">
-        <div className="centreText">
-          {/* React components must have a wrapper node/element */}
-          <h1>BookIt</h1>
-          <h2>Run away with a new book in your hand!</h2>
-
-          <div className="search">
-            <TextField
-              id="genre"
-              label="Genre"
-              className="textField"
-              value={this.state.genre}
-              onChange={this.handleChange('genre')}
-              margin="normal"
-            />
-
-            <Link to="/FirstComponent">
-              {/* <Button variant="outlined" className="btn" onClick={() => this.getBookData(this.state.genre)}>SEARCH</Button> */}
-              <Button variant="outlined" className="btn">SEARCH</Button>
-            </Link>
-          </div>
+    if (!this.state.submitted) {
+      return (
+        <div className="container-fluid">
+          <Main cb={this.cb} />
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="container-fluid">
+          <Result genre={this.state.genre} />
+        </div>      
+      );
+    }
   }
 }
 
