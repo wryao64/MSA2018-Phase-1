@@ -1,22 +1,26 @@
-.centreText {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+body {
+    background-color: antiquewhite !important;
 }
 
 h1 {
-    font-size: 80px;
+    font-size: 60px;
 }
 
-.form {
+.centreText {
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+}
+
+/*----------------------------- Main --------------------------------*/
+/* .form {
     margin: 10px;
-}
-
-.input {
-    /* background-color: aqua; */
-    margin: 10px;
-    /* border: '1px solid #ced4da'; */
-}
-
-/* .btn {
-    background-color: #f6546a;
 } */
+.textField {
+    /* background-color: aqua; */
+    width: 200px;
+    
+}
+
+.paper {
+    padding: 10px;
+}

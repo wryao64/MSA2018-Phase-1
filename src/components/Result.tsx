@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Grid, Paper } from "@material-ui/core";
 
 const API = 'https://openlibrary.org/subjects/';
 // const genreList = ['love'];
@@ -69,24 +69,49 @@ export default class FirstComponent extends React.Component<IProps, bookState> {
   public render() {
     if (this.state.requestFailed) {
       return (
+        
         <div className="centreText">
-          <h2>That is not a valid genre!</h2>
-          <Button variant="outlined" className="btn" onClick={this.props.resetState}>Do another search</Button>
+        <Grid container spacing={16}>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={8}>
+            <Paper className="paper">
+              <h2>That is not a valid genre!</h2>
+              <Button variant="outlined" className="btn" onClick={this.props.resetState}>Do another search</Button>
+            </Paper>
+          </Grid>
+          <Grid item xs={2}></Grid>
+        </Grid>
         </div>
       );
     } else if (!this.state.requestFailed && this.state.bookTitle[0]) {
       return (
         <div className="centreText">
-          <h1>And the book is... </h1>
-          <h2>{this.state.bookTitle}</h2>
-          <h3>Author: {this.state.bookAuthor}</h3>
-          <Button variant="outlined" className="btn" onClick={this.props.resetState}>Do another search</Button>
+          <Grid container spacing={16}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}>
+              <Paper className="paper">
+                <h3>And the book is... </h3>
+                <h1>{this.state.bookTitle}</h1>
+                <h3>Author: {this.state.bookAuthor}</h3>
+                <Button variant="outlined" color="primary" className="btn" onClick={this.props.resetState}>Do another search</Button>
+              </Paper>
+            </Grid>
+            <Grid item xs={2}></Grid>
+          </Grid>
         </div>
       );
     } else {
       return (
         <div className="centreText">
-          <h2>Loading...</h2>
+          <Grid container spacing={16}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}>
+              <Paper className="paper">
+                <h2>Loading...</h2>
+              </Paper>
+            </Grid>
+            <Grid item xs={2}></Grid>
+          </Grid>
         </div>
       );
     }
