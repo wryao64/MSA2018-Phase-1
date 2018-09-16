@@ -31,10 +31,18 @@ class App extends React.Component<WithStyles<typeof styles>, IState> {
   }
 
   //callback function to get genre data from Main
-  cb = (childGenre: string) => {
+  getGenre = (childGenre: string) => {
     this.setState({
       genre: childGenre,
       submitted: true,
+    })
+  }
+
+  //callback function to reset state
+  resetState = () => {
+    this.setState({
+      submitted: false,
+      genre: '',
     })
   }
 
@@ -42,13 +50,13 @@ class App extends React.Component<WithStyles<typeof styles>, IState> {
     if (!this.state.submitted) {
       return (
         <div className="container-fluid">
-          <Main cb={this.cb} />
+          <Main getGenre={this.getGenre} />
         </div>
       );
     } else {
       return (
         <div className="container-fluid">
-          <Result genre={this.state.genre} />
+          <Result genre={this.state.genre} resetState={this.resetState} />
         </div>      
       );
     }

@@ -5,6 +5,7 @@ import Result from './components/Result';
 import { Header } from './components/Header';
 // import SecondComponent from './components/SecondComponent';
 import './css/styles.css';
+import Main from './components/Main';
 
 export const AppRouter: React.StatelessComponent<{}> = () => {
     return (
@@ -14,6 +15,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
                 <Header />
                 <main>
                     <Route exact={true} path="/" component={App} />
+                    <Route path="/Main" component={Main} />
                     <Route path="/Result" component={Result} />
                     {/* <Route path="/SecondComponent" component={SecondComponent} /> */}
                     {/* <Redirect from='*' to='/' /> */}

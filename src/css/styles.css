@@ -1,13 +1,14 @@
 .centreText {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
-.red {
-    background: red;
+h1 {
+    font-size: 80px;
 }
 
-h1 {
-    font-size: 100px;
+.form {
+    margin: 10px;
 }
 
 .input {

@@ -1,9 +1,11 @@
 import * as React from "react";
 // import { TextField, Input } from "@material-ui/core";
 import { IState } from "../App";
+import { TextField, Input } from "@material-ui/core";
+// import { Link } from "react-router-dom";
 
 interface IProps {
-    cb: ((genre: String) => void)
+    getGenre: ((genre: String) => void)
 }
 
 export default class Main extends React.Component<IProps, IState> {
@@ -20,7 +22,7 @@ export default class Main extends React.Component<IProps, IState> {
         this.setState({
           submitted: true,
         })
-        this.props.cb(this.state.genre)
+        this.props.getGenre(this.state.genre)
     }
 
     handleChange = (event:any) => {
@@ -36,10 +38,9 @@ export default class Main extends React.Component<IProps, IState> {
                 {/* React components must have a wrapper node/element */}
                 <h1>BookIt</h1>
                 <h2>Run away with a new book in your hand!</h2>
-
-                <form onSubmit={this.handleSubmit}>
-                    {/* <div className="search"> */}
-                        {/* <TextField
+                
+                <form onSubmit={this.handleSubmit} className="form">
+                        <TextField
                             required
                             id="genre"
                             label="Genre"
@@ -48,15 +49,7 @@ export default class Main extends React.Component<IProps, IState> {
                             onChange={this.handleChange}
                             margin="normal"
                         />
-                        <Input type="submit" value="SEARCH" /> */}
-                        
-                        <input type="text" value={this.state.genre} onChange={this.handleChange} />
-                        <input type="submit" value="Submit" />
-
-                        {/* <Link to="/FirstComponent">
-                            {/* <Button variant="outlined" className="btn">SEARCH</Button>
-                        </Link> */}
-                    {/* </div> */}
+                        <Input type="submit" value="SEARCH" />
                 </form>
             </div>
         );

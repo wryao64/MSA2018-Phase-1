@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { genreVar } from '../App'; 
+import { Button } from "@material-ui/core";
 
 const API = 'https://openlibrary.org/subjects/';
 // const genreList = ['love'];
@@ -7,6 +7,11 @@ const API = 'https://openlibrary.org/subjects/';
 const ending = '.json';
 const queryLimit = '?limit=';
 const LIMIT = 20;
+
+interface IProps {
+  genre: string
+  resetState: (() => void)
+}
 
 interface bookState {
   genre: string,
@@ -16,7 +21,7 @@ interface bookState {
   requestFailed: boolean,
 }
 
-export default class FirstComponent extends React.Component<{ genre: string }, bookState> {
+export default class FirstComponent extends React.Component<IProps, bookState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -66,6 +71,7 @@ export default class FirstComponent extends React.Component<{ genre: string }, b
       return (
         <div className="centreText">
           <h2>That is not a valid genre!</h2>
+          <Button variant="outlined" className="btn" onClick={this.props.resetState}>Do another search</Button>
         </div>
       );
     } else if (!this.state.requestFailed && this.state.bookTitle[0]) {
@@ -74,6 +80,7 @@ export default class FirstComponent extends React.Component<{ genre: string }, b
           <h1>And the book is... </h1>
           <h2>{this.state.bookTitle}</h2>
           <h3>Author: {this.state.bookAuthor}</h3>
+          <Button variant="outlined" className="btn" onClick={this.props.resetState}>Do another search</Button>
         </div>
       );
     } else {
