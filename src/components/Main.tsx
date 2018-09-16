@@ -7,10 +7,19 @@ interface IProps {
 }
 
 export default class Main extends React.Component<IProps, IState> {
-    handleSubmit = (pGenre: string) => (event: any) => {
+    constructor(props:any) {
+        super(props);
+        this.state = {
+          submitted: false,
+          genre: '',
+        }
+    }
+
+    handleSubmit = (event: any) => {
         this.setState({
           submitted: true,
         })
+        this.props.cb(this.state.genre)
     }
 
     handleChange = (event:any) => {
@@ -27,7 +36,7 @@ export default class Main extends React.Component<IProps, IState> {
                 <h1>BookIt</h1>
                 <h2>Run away with a new book in your hand!</h2>
 
-                <form onSubmit={this.handleSubmit(this.state.genre)}>
+                <form onSubmit={this.handleSubmit}>
                     <div className="search">
                         <TextField
                             required

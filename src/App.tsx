@@ -1,18 +1,11 @@
 import * as React from 'react';
 import './App.css';
-// import FormControl from '@material-ui/core/FormControl';
-// import Button from '@material-ui/core/Button';
-// import { Link } from 'react-router-dom';
-// import { Redirect } from 'react-router-dom';
-// import Input from '@material-ui/core/Input';
-// import TextField from '@material-ui/core/TextField';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import withRoot from './withRoot';
 import Result from './components/Result';
 import Main from './components/Main';
-// import { ButtonToolbar } from 'react-bootstrap';
 
 export interface IState {
   submitted:boolean
@@ -41,6 +34,7 @@ class App extends React.Component<WithStyles<typeof styles>, IState> {
   cb = (childGenre: string) => {
     this.setState({
       genre: childGenre,
+      submitted: true,
     })
   }
 
