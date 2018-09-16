@@ -16,7 +16,7 @@ export const AppRouter: React.StatelessComponent<{}> = () => {
                     <Route exact={true} path="/" component={App} />
                     <Route path="/Result" component={Result} />
                     {/* <Route path="/SecondComponent" component={SecondComponent} /> */}
-                    {/* <Redirect from='*' to='/FirstComponent' /> */}
+                    {/* <Redirect from='*' to='/' /> */}
                 </main>
             </div>
         </BrowserRouter>

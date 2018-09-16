@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextField, Input } from "@material-ui/core";
+// import { TextField, Input } from "@material-ui/core";
 import { IState } from "../App";
 
 interface IProps {
@@ -16,6 +16,7 @@ export default class Main extends React.Component<IProps, IState> {
     }
 
     handleSubmit = (event: any) => {
+        event.preventDefault();
         this.setState({
           submitted: true,
         })
@@ -37,8 +38,8 @@ export default class Main extends React.Component<IProps, IState> {
                 <h2>Run away with a new book in your hand!</h2>
 
                 <form onSubmit={this.handleSubmit}>
-                    <div className="search">
-                        <TextField
+                    {/* <div className="search"> */}
+                        {/* <TextField
                             required
                             id="genre"
                             label="Genre"
@@ -47,12 +48,15 @@ export default class Main extends React.Component<IProps, IState> {
                             onChange={this.handleChange}
                             margin="normal"
                         />
-                        <Input type="submit" value="SEARCH"/>
+                        <Input type="submit" value="SEARCH" /> */}
+                        
+                        <input type="text" value={this.state.genre} onChange={this.handleChange} />
+                        <input type="submit" value="Submit" />
 
                         {/* <Link to="/FirstComponent">
                             {/* <Button variant="outlined" className="btn">SEARCH</Button>
                         </Link> */}
-                    </div>
+                    {/* </div> */}
                 </form>
             </div>
         );

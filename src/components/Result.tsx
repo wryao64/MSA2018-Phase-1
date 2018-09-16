@@ -11,14 +11,7 @@ const LIMIT = 20;
 export default class FirstComponent extends React.Component<{genre: string}, {genre:string, bookTitle: [], bookAuthor: [], index: number, requestFailed: boolean}> {        
         constructor(props:any) {
                 super(props);
-                // if (genre != '') {
-                //         genre = this.props.genre;
-                //         console.log(genre);
-                // }
                 this.state = {
-                        // genreInfo: {
-                        //         genre: gI.genre,
-                        // },
                         genre: '',
                         bookTitle: [],
                         bookAuthor: [],
@@ -28,15 +21,15 @@ export default class FirstComponent extends React.Component<{genre: string}, {ge
         }
 
         componentDidMount() {
-                // this.setState({
-                //         genre: genreVar,
-                // })
-                this.getAPIData;
-                // this.setState({genre: genreVar})
+                this.setState({
+                        genre: this.props.genre,
+                })
+                this.getAPIData();
         }
 
         getAPIData() {
-                fetch(API + this.props.genre + ending + queryLimit + LIMIT)
+                let fullQuery = API + this.props.genre + ending + queryLimit + LIMIT;
+                fetch(fullQuery)
                 .then(response => response.json())
                 .then(json => {
                         if (json.ebook_count === 0) {
@@ -44,31 +37,26 @@ export default class FirstComponent extends React.Component<{genre: string}, {ge
                         }
                         this.setState({
                                 bookTitle: json.works[this.state.index].title,
-                                bookAuthor: json.works[0].authors[0].name,
-                                // bookAuthor: json.works[this.state.index].authors[0].name,
+                                bookAuthor: json.works[this.state.index].authors[0].name,
                         })
                         
-                }, () => {
+                        }, () => {
                         this.setState({
                                 requestFailed: true
                         })
                 })
                 .catch((error) => {
-                        console.log(error)
+                        console.log('wow omg an error: ', error)
                 })
         }
 
-
         public render() {
-                console.log("p: " + this.props.genre);
-                console.log("s: " + this.state.genre);
                 if (this.state.requestFailed) return <p>Failed</p>
                 if (this.state.bookTitle === []) return <p>Loading...</p>
                 return (
                         <div className="centreText">
                                 {/* React components must have a wrapper node/element */}
                                 <h1>And the book is... </h1>
-                                <h1>{this.state.genre}</h1>
                                 <h2>{this.state.bookTitle}</h2>
                                 <h3>Author: {this.state.bookAuthor}</h3>
                         </div>
